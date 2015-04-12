@@ -20,7 +20,6 @@ public class SemaphoreExample {
 
 		// Semaphore的大小和资源池的大小一致
 		pass = new Semaphore(size);
-
 	}
 
 	public String get() throws InterruptedException {
@@ -57,14 +56,19 @@ public class SemaphoreExample {
 				try {
 					// 取得resource
 					resource = aPool.get();
-					System.out.println("doing sth");
-					Thread.sleep(1000);
 				} catch (InterruptedException ex) {
 					ex.printStackTrace();
 				}
 
-				// 用resource做工作
-				System.out.println("I worked on " + resource);
+				try {
+					// 用resource做工作
+					System.out.println("I worked on " + resource);
+					System.out.println("doing sth");
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
 				// 归还resource
 				aPool.put(resource);
 			}
