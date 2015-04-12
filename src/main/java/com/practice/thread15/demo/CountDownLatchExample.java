@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class CountDownLatchExample {
+	// latch.await()的阻塞在线程各自准备好后调用latch.countDown()后解除，各线程可以继续处理
 	public static void main(String[] args) throws InterruptedException {
 		// 初始化一个初始值为3的CountDownLatch,3次countDown后运行
 		CountDownLatch latch = new CountDownLatch(3);
@@ -14,9 +15,9 @@ public class CountDownLatchExample {
 		service.submit(new ComponentThreadDemo(latch, 1));
 		service.submit(new ComponentThreadDemo(latch, 2));
 		service.submit(new ComponentThreadDemo(latch, 3));
-
 		// 进入等待状态
 		latch.await();
+
 		// 当所需的三个组件都完成时，go on
 		System.out.println("CountDownLatch finish.starting...");
 		Thread.sleep(5000);
