@@ -10,6 +10,7 @@ public class PhaserExample {
 			protected boolean onAdvance(int phase, int registeredParties) {
 				System.out.println("\n=========华丽的分割线=============");
 				// 本例中，当只剩一个线程时，这个线程必定是主线程，返回true表示终结
+				System.out.println(phase+"  "+registeredParties);
 				return registeredParties == 1;
 			}
 		};
